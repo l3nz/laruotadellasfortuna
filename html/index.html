@@ -1,0 +1,37 @@
+<html>
+<head>
+</head>
+<body>
+
+<center>
+<h2>La ruota gira.....</h2>
+
+Lo sfortunato vincitore è:
+
+
+<h1 id="poverino"></h1>
+</center>
+
+<script>
+
+var rnd = Math.random()
+var text = "Tutti e due"
+
+if ( rnd <.45 ) {
+	text = "Leo"
+} else 
+if ( rnd <.90 ) {
+	text = "Leda"
+}
+
+var div = document.getElementById('poverino');
+div.innerHTML = text;
+
+</script>
+
+
+
+
+
+</body>
+</html>
