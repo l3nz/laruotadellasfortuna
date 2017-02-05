@@ -68,15 +68,13 @@
     (VITTIME p)
 	))
 
-(defn decorate [s]
-   (str ">" s "<"))
-
 (defn update-loop [state]
   (let [sfortunello (extract)]
     (-> state
         (update-in [:sfortunometro sfortunello] inc)
-        (update-in [:victim] (:name sfortunello) )
+        (assoc-in [:victim] (:nome sfortunello) )
         (update-in [:countdown] dec)
+
         )
   ))
 
@@ -85,22 +83,25 @@
 	(if (pos? items-left)
 		(js/setTimeout
       #(swap! app-state update-loop)
-      (/ 1000 LOOPS-PER-SEC))))
+      (/ 1000 LOOPS-PER-SEC)))
+  ""
+  )
 
 
-(defn cmp-button-reset [t]
-  [:input {:type "button" :value "Reset!"
-           :on-click #(reset! app-state EMPTY-STATE)
+(defn cmp-bottone-start [title]
+  [:input {:type "button"
+           :value title
+           :on-click #(reset! app-state (assoc-in EMPTY-STATE [:estrazione] title))
            }])
 
 
 (defn cmp-sfortunometro-entry [colore  numero]
-  [:span {:style {:color colore}}
+  [:span {:style {:color colore} :key colore}
    (reduce str (take numero (repeat "x")))
    ])
 
 (defn cmp-sfortunometro-titolo [nome colore percento]
-  [:span {:style {:color colore :width "200px"}}
+  [:span {:style {:color colore :width "200px"} :key colore}
    (str nome ": "  (js/parseInt (* 100 percento)) "%")
    ])
 
@@ -143,22 +144,22 @@
 
        ]
 
-
     )
-
-
-
-
   )
 
 (defn main-app []
 	(fn []
     (let [state @app-state]
 		[:div
-		 [:h1 (:victim state)]
-		 [:h2 (:countdown state)]
-		 (cmp-button-reset state)
-		 (do-countdown (:countdown state))
+		 [:h1 (str (:estrazione state) ": " (:victim state))]
+		 ;[:h2 (:countdown state)]
+		 (cmp-bottone-start "Apparecchia")
+     (cmp-bottone-start "Sparecchia")
+     (cmp-bottone-start "Aspirapolvere")
+     (cmp-bottone-start "Altro")
+
+
+     (do-countdown (:countdown state))
      (cmp-sfortunometro (:sfortunometro state))
 		 ])))
 
