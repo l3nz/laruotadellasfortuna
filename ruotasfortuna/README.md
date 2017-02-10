@@ -25,6 +25,17 @@ rlwrap ~/lenz_bin/lein figwheel
 
 Not sure bikeshed works.
 
+## Auto reformatting
+
+Checking:
+
+     lein cljfmt check project.clj
+
+Fixing:
+
+     lein cljfmt fix project.clj
+
+
 ## Docs
 
     lein codox

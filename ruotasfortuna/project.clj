@@ -1,12 +1,12 @@
 (defproject ruotasfortuna "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://example.com/FIXME"
+  :description "The wheel of Misfortune! Oh poor kids!"
+  :url "https://github.com/l3nz/laruotadellasfortuna"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :min-lein-version "2.7.1"
 
-:aliases {"bikeshed" ["bikeshed" "--max-line-length" "130"]}
+  :aliases {"bikeshed" ["bikeshed" "--max-line-length" "130"]}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.229"]
@@ -18,21 +18,18 @@
             [lein-cljsbuild "1.1.4" :exclusions [[org.clojure/clojure]]]
             [docstring-checker "1.0.0"]
             [jonase/eastwood "0.2.3"
-                              :exclusions [org.clojure/clojure]]
+             :exclusions [org.clojure/clojure]]
             [lein-bikeshed "0.4.1"]
             [lein-expectations "0.0.8"]
             [lein-codox "0.10.3"]
-   ]
+            [lein-cljfmt "0.5.6"]]
 
-:codox {:language :clojurescript
-        :source-paths ["src/"]
-}
-
-:docstring-checker {  :include [#"ruotasfortuna"]
-                      :exclude [#"test"]}
- :eastwood {:add-linters [:unused-locals
-                                            :unused-private-vars]
-                              :exclude-namespaces [:test-paths]}
+  :codox {:language :clojurescript
+          :source-paths ["src/"]} :docstring-checker {:include [#"ruotasfortuna"]
+                                                      :exclude [#"test"]}
+  :eastwood {:add-linters [:unused-locals
+                           :unused-private-vars]
+             :exclude-namespaces [:test-paths]}
 
   :source-paths ["src"]
 
@@ -106,10 +103,7 @@
 
              ;; to configure a different figwheel logfile path
              ;; :server-logfile "tmp/logs/figwheel-logfile.log"
-             }
-
-
-  ;; setting up nREPL for Figwheel and ClojureScript dev
+};; setting up nREPL for Figwheel and ClojureScript dev
   ;; Please see:
   ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl
 
@@ -123,6 +117,4 @@
                    ;; :plugins [[cider/cider-nrepl "0.12.0"]]
                    :repl-options {; for nREPL dev you really need to limit output
                                   :init (set! *print-length* 50)
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
-
-)
+                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}})
