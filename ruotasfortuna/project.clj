@@ -6,6 +6,8 @@
 
   :min-lein-version "2.7.1"
 
+:aliases {"bikeshed" ["bikeshed" "--max-line-length" "130"]}
+
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.229"]
                  [org.clojure/core.async "0.2.391"
@@ -13,7 +15,21 @@
                  [reagent "0.6.0"]]
 
   :plugins [[lein-figwheel "0.5.8"]
-            [lein-cljsbuild "1.1.4" :exclusions [[org.clojure/clojure]]]]
+            [lein-cljsbuild "1.1.4" :exclusions [[org.clojure/clojure]]]
+            [docstring-checker "1.0.0"]
+            [jonase/eastwood "0.2.3"
+                              :exclusions [org.clojure/clojure]]
+            [lein-bikeshed "0.4.1"]
+            [lein-expectations "0.0.8"]
+            [lein-codox "0.10.3"]
+   ]
+
+:codox {:language :clojurescript}
+:docstring-checker {  :include [#"ruotasfortuna"]
+                      :exclude [#"test"]}
+ :eastwood {:add-linters [:unused-locals
+                                            :unused-private-vars]
+                              :exclude-namespaces [:test-paths]}
 
   :source-paths ["src"]
 
@@ -49,6 +65,8 @@
                 :compiler {:output-to "resources/public/js/compiled/ruotasfortuna.js"
                            :main ruotasfortuna.core
                            :optimizations :advanced
+                           ;;:externs ["preamble.js"]
+                           ;;:preamble ["license.js"]
                            :pretty-print false}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"

@@ -17,3 +17,16 @@ rlwrap ~/lenz_bin/lein figwheel
 ~/lenz_bin/lein clean
 ~/lenz_bin/lein cljsbuild once min
 
+
+## Testing && linting
+
+
+    lein test && lein eastwood && lein bikeshed && lein docstring-checker
+
+Not sure bikeshed works.
+
+## Docs
+
+    lein codox
+
+
