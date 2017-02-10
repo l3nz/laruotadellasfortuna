@@ -24,7 +24,10 @@
             [lein-codox "0.10.3"]
    ]
 
-:codox {:language :clojurescript}
+:codox {:language :clojurescript
+        :source-paths ["src/"]
+}
+
 :docstring-checker {  :include [#"ruotasfortuna"]
                       :exclude [#"test"]}
  :eastwood {:add-linters [:unused-locals
